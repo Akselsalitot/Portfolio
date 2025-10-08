@@ -143,6 +143,25 @@
   max-width: 800px;
   padding: 20px;
 }
+.hero .hero-inner {
+  text-align: left;
+  align-items: flex-start;
+  margin-left: 5%; /* optionnel : pour décaler légèrement du bord gauche */
+}
+.hero-inner > .chip {
+  display: inline-block;
+  left: 50%;
+  transform: translateX(-100%);
+  position: relative;
+}
+
+.hero-inner > .chips {
+  display: inline-block;
+  left: 50%;
+  transform: translateX(-75%);
+  position: relative;
+}
+
 
 /* Overlay fondu bas */
 .hero::after {
@@ -157,7 +176,6 @@
     .kicker{letter-spacing:.35em;text-transform:uppercase;color:var(--muted);font-size:.8rem;margin-bottom:10px}
     .title{font-family:"Playfair Display",serif;font-size:clamp(40px,7vw,88px);line-height:1.03;margin:8px 0}
     .lead{color:#d7d7da;font-size:clamp(16px,2.2vw,20px);margin-bottom:20px}
-    .chips{display:flex;justify-content:center;flex-wrap:wrap;gap:10px}
     .chip{display:inline-flex;align-items:center;gap:.6rem;border:1px solid var(--line);padding:.8rem 1.1rem;border-radius:999px;background:var(--glass);backdrop-filter:saturate(1.2) blur(6px);-webkit-backdrop-filter:saturate(1.2) blur(6px);color:var(--fg);}
 
     /* Section titles */
@@ -392,7 +410,7 @@
   </div>
 
   <div class="hero-inner">
-    <div class="kicker">Aksel Salitot</div>
+    <div class="chip">Aksel Salitot</div>
     <h1 class="title">Une histoire se raconte avec des mots.</h1>
     <p class="lead">Réalisateur & créatif basé en France. Courts-métrages, Long-métrage.</p>
     <div class="chips">
