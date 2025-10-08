@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aksel Salitot - Portfolio</title>
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="icon" href="images/logo.png">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg:#0b0b0c; --fg:#fafafa; --muted:#bdbdbf; --glass:rgba(255,255,255,.06);
+      --line:rgba(255,255,255,.12); --accent:#e7e7ea; --brand:#ffffff;
+      --max:1200px; --pad:clamp(16px, 3vw, 28px);
+    }
+
+    *{box-sizing:border-box}
+    html,body{
+      margin:0;
+      padding: 0;
+      overflow-x: hidden;
+      height:100%;
+      background:var(--bg);color:var(--fg);font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+
+    .container{max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
+    .grid{display:grid;gap:clamp(14px,1.8vw,22px)}
+
+    .btn{display:inline-flex;align-items:center;gap:.6rem;border:1px solid var(--line);padding:.8rem 1.1rem;border-radius:999px;background:var(--glass);backdrop-filter:saturate(1.2) blur(6px);-webkit-backdrop-filter:saturate(1.2) blur(6px);color:var(--fg);}
+    .btn:hover{border-color:#fff}
+/* --- GALERIE --- */
+#galerie {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.gallery-scroll {
+  overflow-x: hidden;   /* plus besoin de scroll horizontal */
+  padding-bottom: 10px;
+}
+
+.gallery-grid {
+  column-count: 4;       /* nombre de colonnes */
+  column-gap: 15px;      /* espace entre colonnes */
+}
+
+.gallery-item {
+  background: #111;
+  border-radius: 10px;
+  margin-bottom: 15px;   /* espace vertical */
+  display: inline-block; /* indispensable pour masonry */
+  width: 100%;           /* prend toute la largeur de sa colonne */
+  transition: transform 0.2s ease;
+}
+
+.gallery-item:hover {
+  transform: scale(1.03);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+  background-color: #000;
+}
+
+.gallery-caption {
+  margin-top: 5px;
+  font-size: 0.9rem;
+  color: #ddd;
+  text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .gallery-grid { column-count: 2; }
+}
+
+@media (max-width: 600px) {
+  .gallery-grid { column-count: 1; }
+}
+
+
+    /* Header */
+    header{position:sticky;top:0;z-index:50;backdrop-filter:saturate(1.2) blur(8px);-webkit-backdrop-filter:saturate(1.2) blur(8px);background:linear-gradient(180deg, rgba(11,11,12,.8), rgba(11,11,12,.35) 60%, transparent)}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px var(--pad);border-bottom:1px solid var(--line)}
+    .brand{font-weight:800;letter-spacing:.02em}
+    .brand b{font-weight:900}
+    .nav a{opacity:.85}
+    .nav a:hover{opacity:1}
+    .nav-links{display:flex;gap:1rem}
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+}
+
+.carousel {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+}
+
+.slide {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1.2s ease-in-out;
+  z-index: 0;
+}
+.slide::before {
+  content: "";
+  position: absolute;
+  inset: 0; /* top:0; right:0; bottom:0; left:0 */
+  background: rgba(0,0,0,0.4); /* niveau d'assombrissement, ajuste 0.4 à ton goût */
+  z-index: 1;
+}
+
+.slide.active {
+  opacity: 1;
+  z-index: 1;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  padding: 20px;
+}
+
+/* Overlay fondu bas */
+.hero::after {
+  content: "";
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 200px;
+  background: linear-gradient(to bottom, rgba(11,11,12,0) 0%, rgba(11,11,12,1) 100%);
+  z-index: 1;
+}
+
+    .kicker{letter-spacing:.35em;text-transform:uppercase;color:var(--muted);font-size:.8rem;margin-bottom:10px}
+    .title{font-family:"Playfair Display",serif;font-size:clamp(40px,7vw,88px);line-height:1.03;margin:8px 0}
+    .lead{color:#d7d7da;font-size:clamp(16px,2.2vw,20px);margin-bottom:20px}
+    .chips{display:flex;justify-content:center;flex-wrap:wrap;gap:10px}
+    .chip{display:inline-flex;align-items:center;gap:.6rem;border:1px solid var(--line);padding:.8rem 1.1rem;border-radius:999px;background:var(--glass);backdrop-filter:saturate(1.2) blur(6px);-webkit-backdrop-filter:saturate(1.2) blur(6px);color:var(--fg);}
+
+    /* Section titles */
+    .section{padding:clamp(48px,8vw,96px) 0;border-bottom:1px solid var(--line);text-align:center}
+    .section h2{font-size:clamp(28px,4.5vw,52px);margin:.2rem 0 1rem;font-family:"Playfair Display",serif}
+    .section .sub{color:var(--muted);text-transform:uppercase;letter-spacing:.28em;font-size:.75rem}
+
+    /* Projects */
+    .projects{grid-template-columns:repeat(12, 1fr)}
+    .card{grid-column:span 6; position:relative; overflow:hidden; border-radius:22px; border:1px solid var(--line); background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));}
+    .card.tall{grid-column:span 12}
+    @media (max-width:900px){.card{grid-column:span 12}}
+    .thumb{aspect-ratio:16/9; overflow:hidden}
+    .thumb img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+    .card:hover .thumb img{transform:scale(1.06)}
+    .meta{padding:16px 16px 18px;text-align:left}
+    .meta h3{margin:0 0 6px;font-size:clamp(18px,2.6vw,22px)}
+    .meta p{margin:0;color:#d0d0d4}
+    .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .tag{border:1px solid var(--line);padding:.35rem .7rem;border-radius:999px;color:#dcdce0}
+    .play{position:absolute;inset:auto 16px 16px auto;background:var(--glass);border:1px solid var(--line);border-radius:999px;padding:.6rem .9rem;display:flex;align-items:center;gap:.5rem}
+
+    .img-tag {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      padding: 6px 12px;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(6px);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 600;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.3);
+      z-index: 10;
+    }
+
+    /* About */
+    .cols{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(16px,3vw,28px);text-align:left}
+    @media (max-width:900px){.cols{grid-template-columns:1fr}}
+    .about-box{border:1px solid var(--line);border-radius:22px;padding:clamp(18px,2.8vw,28px);background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02))}
+    .list{display:grid;gap:10px;margin:0;padding:0;list-style:none}
+    .list li{display:flex;justify-content:space-between;border-bottom:1px dashed var(--line);padding:10px 0}
+    .list small{color:var(--muted)}
+
+    /* Contact */
+    input,textarea{width:100%;background:#0f0f11;border:1px solid var(--line);border-radius:14px;color:var(--fg);padding:12px 14px;font:inherit}
+    textarea{min-height:140px;resize:vertical}
+    .success{display:none;margin-top:10px;color:#9be29b}
+
+    /* Footer */
+    footer{padding:28px var(--pad);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;color:#c9c9cf}
+/* Scrollbar — Chrome, Edge, Safari */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; /* ou var(--bg) */
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.25);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+  transition: background .3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,0.45);
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+/* Scrollbar — Firefox */
+* {
+  scrollbar-width: thin;              /* épaisseur */
+  scrollbar-color: rgba(255,255,255,0.25) transparent;
+}
+.logo-hero {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 3; /* au-dessus du fond */
+}
+
+.logo-hero img {
+  height: 80px; /* ajuste la taille du logo */
+  width: auto;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4)); /* optionnel, pour lisibilité */
+}
+
+/* --- TAB BAR --- */
+.tabbar {
+  position: fixed;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(95%, 420px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(12px) saturate(1.2);
+  -webkit-backdrop-filter: blur(12px) saturate(1.2);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 30px;
+  padding: 10px 14px;
+  z-index: 999;
+}
+
+/* Bouton central (Accueil) */
+.tab-home {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  border: 3px solid rgba(255,255,255,0.15);
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.tab-home img {
+  width: 55px;
+  height: 55px;
+  transition: transform .3s ease;
+}
+
+.tab-home:hover {
+  transform: translate(-50%, -10%) scale(1.05);
+  box-shadow: 0 4px 18px rgba(255,255,255,0.25);
+}
+
+/* Icônes classiques */
+.tab-link {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.75rem;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color .3s ease;
+}
+
+.tab-link i {
+  font-size: 1.4rem;
+}
+
+.tab-link.active,
+.tab-link:hover {
+  color: var(--fg);
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  margin-top: 30px;
+}
+
+/* Cartes */
+.timeline-card {
+  background: #2b2b2b;
+  padding: 18px 24px;
+  border-radius: 14px;
+  min-width: 240px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+.card-content h4 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.card-content p {
+  margin: 6px 0 0;
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+/* Ligne + pastilles */
+.timeline-line {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.timeline-line .line {
+  width: 3px;
+  height: 40px; /* longueur de la ligne entre les deux points */
+  background: #fff;
+  opacity: 0.7;
+  border-radius: 4px;
+}
+
+.timeline-line .dot {
+  width: 16px;
+  height: 16px;
+  background: #fff;
+  border-radius: 50%;
+  border: 3px solid #2b2b2b;
+}
+
+  </style>
+</head>
+
+<body>
+  <main id="top">
+
+<section class="hero">
+  <div class="logo-hero">
+    <img src="images/logo.svg" alt="Logo">
+  </div>
+
+  <div class="carousel">
+    <div class="slide active" style="background-image:url('https://undsgn.com/wp-content/uploads/2018/06/hulgjayakfo.jpg')"></div>
+    <div class="slide" style="background-image:url('https://www.francebleu.fr/pikapi/images/d585a3f8-35c7-4d50-8c4d-07e6e9d703b7/1200x680?webp=false')"></div>
+    <div class="slide" style="background-image:url('https://www.formations-audiovisuel.fr/images/Ressourcesimage0/2093-1706177046-1_2/metier-realisateur.jpg')"></div>
+  </div>
+
+  <div class="hero-inner">
+    <div class="kicker">Aksel Salitot</div>
+    <h1 class="title">Une histoire se raconte avec des mots.</h1>
+    <p class="lead">Réalisateur & créatif basé en France. Courts-métrages, Long-métrage.</p>
+    <div class="chips">
+      <span class="chip">Réalisation</span>
+      <span class="chip">Écriture</span>
+    </div>
+  </div>
+</section>
+
+
+
+    <!-- PROJETS -->
+    <section id="projets" class="section container">
+      <p class="sub">Sélection</p>
+      <h2>Projets</h2>
+
+      <div class="grid projects">
+
+        <!-- Projet 1 -->
+        <article class="card">
+          <div class="thumb"><img src="images/Calderón.png" alt="Affiche du projet Calderón"></div>
+          <span class="img-tag">Image non définitive</span>
+          <div class="meta">
+            <h3>Calderón</h3>
+            <p>Long-métrage — Réalisation, Écriture, Commencé en 2025</p>
+            <div class="tags"><span class="tag">Policier</span><span class="tag">Scénario</span><span class="tag">En cours d'écriture</span></div>
+          </div>
+        </article>
+
+        <!-- Projet 1 -->
+        <article class="card">
+          <div class="thumb"><img src="images/Wraith .png" alt="Affiche du projet Calderón"></div>
+          <span class="img-tag">Image non définitive</span>
+          <div class="meta">
+            <h3>Wraith</h3>
+            <p>Long-métrage — Réalisation, Écriture, Commencé en 2025</p>
+            <div class="tags"><span class="tag">Super Héro</span><span class="tag">Scénario</span><span class="tag">En cours d'écriture</span></div>
+          </div>
+        </article>
+
+        <!-- Projet 2 
+        <article class="card">
+          <div class="thumb"><img src="images/Lucien.png" alt="Affiche du projet Lucien"></div>
+          <span class="img-tag">Image non définitive</span>
+          <div class="meta">
+            <h3>Lucien</h3>
+            <p>Court-métrage — Réalisation, Écriture, 2025</p>
+            <div class="tags"><span class="tag">Horreur</span><span class="tag">Fantastique</span><span class="tag">Scénario</span><span class="tag">En cours d'écriture</span></div>
+          </div>
+        </article>-->
+        <article class="card">
+          <div class="thumb"><img src="images/Le_Casse.png" alt="Affiche du projet Lucien"></div>
+          <span class="img-tag">Image non définitive</span>
+          <div class="meta">
+            <h3>Le casse</h3>
+            <p>Court-métrage — Réalisation, Écriture, 2025</p>
+            <div class="tags"><span class="tag">Braquage</span><span class="tag">Scénario</span><span class="tag">En cours d'écriture</span></div>
+          </div>
+        </article>
+        
+        <!-- Projet 3 -->
+        <article class="card">
+          <div class="thumb"><img src="images/La_FUITE.png" alt="Affiche du projet Fuite"></div>
+          <span class="img-tag">Image non définitive</span>
+          <div class="meta">
+            <h3>La Fuite</h3>
+            <p>Court-métrage — Réalisation, Écriture, 2024</p>
+            <div class="tags"><span class="tag">Drame</span><span class="tag">Suspense</span><span class="tag">Scénario</span><span class="tag">En cours d'écriture</span></div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- À PROPOS -->
+    <section id="apropos" class="section container">
+      <p class="sub">Bio</p>
+      <h2>À propos</h2>
+
+      <div class="cols">
+
+        <div class="about-box">
+<h3>Qui suis-je ?</h3>
+
+<p>Bonjour, je suis Aksel Salitot.</p> 
+
+<p>J’ai 17 ans et je rêve de devenir réalisateur. Le cinéma me passionne depuis toujours, mais ce n’est que récemment que je me suis vraiment lancé. Depuis janvier, je travaille sur l’écriture de  <u><em>Calderón – Partie 1</em></u>, un projet qui me tient profondément à cœur.</p>
+<p> Au cours des trois prochaines années, je vais tout mettre en œuvre pour financer mes études dans une école de cinéma et réaliser mon rêve.</p>
+
+<p>J’habite en <u>France</u> et j’aimerais m’orienter vers des films internationaux.</p>
+
+          <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap">
+            <a class="btn" href="#contact">Contact</a>
+            <a class="btn" href="#projets">Mes Projets</a>
+            <a class="btn" href="cv.pdf" target="_blank">Mon CV</a>
+
+          </div>
+        </div>
+        <div class="grid">
+          <div class="about-box">
+            <h3>Sélection clients</h3>
+            <ul class="list">
+              <li><span>Aucun client pour le moment</span></li>
+              
+                 <!--       <li><span>Canal+</span> <small>2023</small></li>
+              <li><span>Association X</span> <small>2022</small></li>
+              <li><span>Label Indé</span> <small>2021</small></li>
+            </ul>   -->
+            </ul>
+          </div>
+
+          <div class="about-box">
+            <h3>Compétences</h3>
+            <ul class="list">
+              <li><span>Réalisation</span> <small>Direction</small></li>
+              <li><span>Écriture</span> <small>Synopsis</small></li>
+              <li><span>Montage</span> <small>Post-production</small></li>
+              <li><span>Création visuelle</span> <small>Affiches & visuels</small></li>
+            </ul>
+          </div>
+        </div>
+              <!--
+  <div class="about-box">
+    <h3>Mon parcours</h3>
+
+    <div class="timeline">
+      
+      <div class="timeline-card">
+        <div class="card-content">
+          <h4>🎬 Tournage – <em>La Fuite</em></h4>
+          <p>Fin 2025</p>
+        </div>
+      </div>
+
+      <div class="timeline-line">
+        <span class="dot"></span>
+        <span class="line"></span>
+        <span class="dot"></span>
+      </div>
+
+      <div class="timeline-card">
+        <div class="card-content">
+          <h4>🎓 Lycée Jacques Prévert</h4>
+          <p>2022 – mi-2025</p>
+        </div>
+      </div>
+
+    </div>
+  </div>-->
+      </div>
+    </section>
+<!-- GALERIE -->
+<section id="galerie" class="section container">
+
+  <p class="sub">Images</p>
+  <h2>Galerie</h2>
+
+  <div class="gallery-scroll">
+    <div class="gallery-grid">
+
+      <div class="gallery-item">
+        <img src="images/Calderón.png" alt="Photo 1">
+        <div class="gallery-caption">Tournage – Calderón</div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="images/La_FUITE.png" alt="Photo 2">
+        <div class="gallery-caption">Behind the scenes</div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="images/Wraith_V3.png" alt="Photo 3">
+        <div class="gallery-caption">Storyboard – Wraith</div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="images/Wraith .png" alt="Photo 4">
+        <div class="gallery-caption">Concept visuel</div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="images/Wraith_V1.png" alt="Photo 5">
+        <div class="gallery-caption">Concept visuel</div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="images/Wraith_V2.png" alt="Photo 6">
+        <div class="gallery-caption">Concept visuel</div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="images/Wraith_V3.png" alt="Photo 7">
+        <div class="gallery-caption">Concept visuel</div>
+      </div>
+      <div class="gallery-item">
+        <img src="images/Calderón.png" alt="Photo 1">
+        <div class="gallery-caption">Tournage – Calderón</div>
+      </div>
+      <div class="gallery-item">
+        <img src="images/Wraith_V2.png" alt="Photo 6">
+        <div class="gallery-caption">Concept visuel</div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+
+
+    
+    <!-- CONTACT -->
+    <section id="contact" class="section container">
+      <p class="sub">Discutons</p>
+      <h2>Contact</h2>
+
+      <div class="cols">
+        <div class="about-box">
+          <h3>Infos</h3>
+            <ul class="list">
+              <li><span>Email</span> <small><a href="mailto:Salitotaksel@gmail.com">Salitotaksel@gmail.com</a></small></li>
+              <li><span>Instagram</span> <small><a href="#">@votrenom</a></small></li>
+              <li><span>Youtube</span> <small><a href="#">/votrenom</a></small></li>
+              <li><span>Basé en</span> <small>France</small></li>
+            </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 Aksel Salitot — Aucun droits réservés</p>
+    <p><a href="mailto:Salitotaksel@gmail.com">Salitotaksel@gmail.com</a></p>
+  </footer>
+<nav class="tabbar">
+  <a href="#projets" class="tab-link"><i class="bi bi-projector"></i><span>Projets</span></a>
+  <a href="#apropos" class="tab-link"><i class="bi bi-person"></i><span>Bio</span></a>
+
+  <!-- Espace réservé pour le bouton central -->
+  <div style="flex: 0 0 64px;"></div>
+
+  <a href="#galerie" class="tab-link"><i class="bi bi-image"></i><span>Galerie</span></a>
+  <a href="#contact" class="tab-link"><i class="bi bi-envelope"></i><span>Contact</span></a>
+
+  <!-- Bouton central (Accueil) -->
+  <a href="#top" class="tab-home">
+    <img id="homeLogo" src="images/logo.svg" alt="Accueil">
+  </a>
+</nav>
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  // ===== Smooth Scroll =====
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const href = a.getAttribute('href');
+      if(href && href.length > 1){
+        e.preventDefault();
+        document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+
+  // ===== Tabbar =====
+  const tabLinks = document.querySelectorAll(".tabbar .tab-link");
+  const homeBtn = document.querySelector(".tab-home img");
+
+function activateTab(tab) {
+  if (!tab) return; // sécurité
+
+  // Réinitialisation des autres
+  tabLinks.forEach(link => {
+    link.classList.remove("active");
+    const icon = link.querySelector("i");
+    if(icon && icon.className.includes("-fill")){
+      icon.className = icon.className.replace("-fill","");
+    }
+  });
+
+  // Désactive le logo (retour à svg)
+  if (homeBtn) homeBtn.src = "images/logo.svg";
+
+  // Active le bouton cliqué
+  if (tab.classList.contains("tab-link")) {
+    tab.classList.add("active");
+    const icon = tab.querySelector("i");
+    if(icon && !icon.className.includes("-fill")){
+      icon.className = icon.className.replace(/bi-\w+/g, m => m + "-fill");
+    }
+  }
+
+  // Si c’est l’accueil → logo.png
+  if (tab.getAttribute("href") === "#top") {
+    if (homeBtn) homeBtn.src = "images/logo.png";
+  }
+}
+
+  // clic sur tab
+  tabLinks.forEach(link => link.addEventListener("click", () => activateTab(link)));
+  document.querySelector(".tab-home").addEventListener("click", () => {
+activateTab(document.querySelector('.tabbar .tab-home'));
+  });
+
+  // Activer accueil au démarrage
+activateTab(document.querySelector('.tabbar .tab-home'));
+
+  // ===== IntersectionObserver pour suivre les sections =====
+  const sections = document.querySelectorAll("main section, .hero");
+  const observerOptions = {
+    root: null,
+    threshold: 0.1,          
+    rootMargin: "-20% 0px -20% 0px"
+  };
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        const id = entry.target.id || "top";
+        const link = document.querySelector(`.tabbar .tab-link[href="#${id}"]`);
+        if(link) activateTab(link);
+        if(id === "top") {
+          if (homeBtn) homeBtn.src = "images/logo.png";
+        } else {
+          if (homeBtn) homeBtn.src = "images/logo.svg";
+        }
+      }
+    });
+  }, observerOptions);
+
+  sections.forEach(sec => io.observe(sec));
+
+  // ===== Carousel Hero =====
+  const slides = document.querySelectorAll(".slide");
+  if(slides.length){
+    let index = 0;
+    setInterval(() => {
+      slides.forEach(s => { 
+        s.classList.remove("active"); 
+        s.style.zIndex = 0; 
+      });
+      index = (index + 1) % slides.length;
+      slides[index].classList.add("active");
+      slides[index].style.zIndex = 1;
+    }, 10000);
+  }
+
+});
+</script>
+
+</body>
+</html>
